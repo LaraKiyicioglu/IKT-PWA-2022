@@ -1,4 +1,4 @@
-# Progressive Web Apps - Aktuelle Trends der IKT 2021
+# Progressive Web Apps - Aktuelle Trends der IKT 2022
 
 Dieses Projekt enthält das Grundgerüst einer Webanwendung. Auf diesem Grundgerüst bauen wir auf und fügen sukzessive *progressive* Funktionalitäten hinzu, so dass am Ende eine *Progressive Web Application* entsteht. 
 
@@ -12,13 +12,13 @@ Dieses Projekt enthält das Grundgerüst einer Webanwendung. Auf diesem Grundger
 
 	`npm install` 
 
-	aus. Damit werden alle erforderlichen Abhängigkeiten installiert.
+	aus (es genügt auch `npm i`). Damit werden alle erforderlichen Abhängigkeiten installiert. Es entsteht der `node_modules`-Ordner. 
 
 - Nach erfolgreicher Installation der Abhängigkeiten, geben Sie  
 
 	`npm start` 
 
-	ein, um Ihr Projekt auszuführen. Klicken Sie danach auf [localhost:8080](http://localhost:8080) oder geben Sie die URL direkt in Ihren Browser ein.
+	ein, um Ihr Projekt auszuführen (Es wird der `http-server` mit der Option `-c-1` gestartet. Diese Option disabled Caching). Klicken Sie danach auf [localhost:8080](http://localhost:8080) oder geben Sie die URL direkt in Ihren Browser ein.
 
 - Sollten Sie Änderungen an der IMplementierung vornehmen und diese ausprobieren wollen, müssen Sie den Server zunächst wieder stoppen:
 
