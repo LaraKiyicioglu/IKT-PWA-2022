@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/db.js');
 
-const CACHE_VERSION = 39;
+const CACHE_VERSION = 41;
 const CURRENT_STATIC_CACHE = 'static-v'+CACHE_VERSION;
 const CURRENT_DYNAMIC_CACHE = 'dynamic-v'+CACHE_VERSION;
 const STATIC_FILES = [
@@ -130,6 +130,26 @@ self.addEventListener('sync', event => {
     }
 })
 
+self.addEventListener('push', event => {
+    console.log('push notification received', event);
+    let data = { title: 'Test', content: 'Fallback message', openUrl: '/'};
+    if(event.data) {
+        data = JSON.parse(event.data.text());
+    }
+
+    let options = {
+        body: data.content,
+        icon: '/src/images/icons/fiw96x96.png',
+        /*        data: {
+                    url: data.openUrl
+                }*/
+    };
+
+    event.waitUntil(
+        self.registration.showNotification(data.title, options)
+    );
+});
+
 self.addEventListener('notificationclick', event => {
     let notification = event.notification;
     let action = event.action;
@@ -149,10 +169,10 @@ self.addEventListener('notificationclick', event => {
                     });
 
                     if(clients !== undefined) {
-                        clients.navigate(notification.data.url);
+                        clients.navigate('http://localhost:8080'); /* notification.data.url*/
                         clients.focus();
                     } else {
-                        clients.openWindow(notification.data.url);
+                        clients.openWindow('http://localhost:8080');
                     }
                     notification.close();
                 })
@@ -164,22 +184,4 @@ self.addEventListener('notificationclose', event => {
     console.log('notification was closed', event);
 });
 
-self.addEventListener('push', event => {
-    console.log('push notification received', event);
-    let data = { title: 'Test', content: 'Fallback message', openUrl: '/'};
-    if(event.data) {
-        data = JSON.parse(event.data.text());
-    }
 
-    let options = {
-        body: data.content,
-        icon: '/src/images/icons/fiw96x96.png',
-        data: {
-            url: data.openUrl
-        }
-    };
-
-    event.waitUntil(
-        self.registration.showNotification(data.title, options)
-    );
-});

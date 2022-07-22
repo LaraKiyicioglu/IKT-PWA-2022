@@ -9,15 +9,16 @@ require('dotenv').config()
 const publicVapidKey = 'BIfifujhjPS_u-t87dAhTEXnKALUnKXwifqERnU8NvB-RcczEugNO8bJI6VKC8XgsnsPRExdEv2y058_lv6h1cY';
 const privateVapidKey = '22ecLfZQwwfi5xdnjfA7M5nDRuvRA6l2DSqzHh76UR4';
 const pushSubscription = {
-    endpoint: 'https://fcm.googleapis.com/fcm/send/cMdUtRW4H9o:APA91bG8p3o-Ta31e1yMrqdvonJCyf3xbPfIFtpS2UbX9PcJwkeNKoQjZhEAWo5nad7eR3NgRQR8__3wk591j7DKWJLGzwWgJYm_GgipU0gTvMRpWA6TpmCtrD9OCo1mB0jZQrTj5a_5',
+    endpoint: 'https://fcm.googleapis.com/fcm/send/cTN97JOGfvA:APA91bGTF-Hnp7pED63qSKUb4SEVU5QpiRSbVbB5GTIZCAZfTPG8WHUU8e2PjWWQRof-TE41eLTs3W0c64ycpaYCTzHrSxkvq5CJoddJBPmMd_TtHJuIVrbB6RWVmAGuCTzNwt-IUYLj',
+    expirationTime: null,
     keys: {
-        auth: '22ecLfZQwwfi5xdnjfA7M5nDRuvRA6l2DSqzHh76UR4',
-        p256dh: 'BIfifujhjPS_u-t87dAhTEXnKALUnKXwifqERnU8NvB-RcczEugNO8bJI6VKC8XgsnsPRExdEv2y058_lv6h1cY',
+        p256dh: 'BO42PqsRTJ-sP9oFmLeFKzerybPtMPduEVRpJXbKmlqk1lR2M_Rtr6lXLnz4o-1XeqPGh6AnNgYzrn6t4BLBojo',
+        auth: 'zDshw__AepBgbXbSZCCtDg'
     }
 };
 
 function sendNotification() {
-    webpush.setVapidDetails('mailto:freiheit@htw-berlin.de', publicVapidKey, privateVapidKey);
+    webpush.setVapidDetails('mailto:s0574645@htw-berlin.de', publicVapidKey, privateVapidKey);
     const payload = JSON.stringify({
         title: 'New Push Notification',
         content: 'New data in database!'
@@ -27,6 +28,8 @@ function sendNotification() {
     console.log('push notification sent');
     // res.status(201).json({ message: 'push notification sent'});
 }
+
+
 
 /* ----------------- POST ---------------------------- */
 

@@ -59,7 +59,10 @@ function configurePushSubscription() {
     navigator.serviceWorker.ready
         .then( sw => {
             swReg = sw;
-            return sw.pushManager.getSubscription();
+            console.log('sw.pushManager', sw.pushManager)
+            const subscription = sw.pushManager.getSubscription();
+            console.log('subscription', subscription)
+            return subscription
         })
         .then( sub => {
             if(sub === null) {
@@ -71,7 +74,14 @@ function configurePushSubscription() {
                     applicationServerKey: convertedVapidPublicKey,
                 });
             } else {
-                // already subscribed
+                /* zum Testen, falls subscription bereits existierte,
+             * aber neue erstellt werden soll
+             */
+
+               /* sub.unsubscribe()
+                    .then( () => {
+                        console.log('unsubscribed()', sub)
+                    })*/
             }
         })
         .then( newSub => {
