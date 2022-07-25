@@ -1,53 +1,57 @@
 # Progressive Web Apps - Aktuelle Trends der IKT 2022
 
-Dieses Projekt enthält das Grundgerüst einer Webanwendung. Auf diesem Grundgerüst bauen wir auf und fügen sukzessive *progressive* Funktionalitäten hinzu, so dass am Ende eine *Progressive Web Application* entsteht. 
+Dieses Projekt enthält die Semesteraufgabe aus - aktuelle Trends der IKT 2022. 
+Im Laufe des Semesters ist eine *Progressive Web Application* entstanden. Diese readME soll einen Einblick in die Funktionalitäten 
+geben und Aufschluss über die lokale Nutzung. Ich habe mich dafür entschieden einen food Blog zu implementieren.
+Die Idee kam mir als ich überlegte wie man am besten die Kamera Funktion sowie die Geolocation nutzen könnte. Außerdem bin ich selbst
+oft auf solchen Blogs unterwegs auf der Suche nach neuen Restaurants & Cafés. 
+
 
 ## Installation
 
-- Zum Ausführen des Projektes wird [Node.js](https://nodejs.org) verendet. Sie müssen es auf Ihren Rechner installieren. 
+- Zum Ausführen des Projektes wird [Node.js](https://nodejs.org) verwendet. Sie müssen es auf Ihren Rechner installieren. 
 
-- In der Wahl Ihrer IDE sind Sie völlig frei. Empfehlungen finden Sie unter [https://freiheit.f4.htw-berlin.de/ikt/tools/#integrated-development-environment-ide](https://freiheit.f4.htw-berlin.de/ikt/tools/#integrated-development-environment-ide)
+- Zum Starten des Projektes wechseln Sie im Terminal in den Projektordner (`IKT-PWA`) und führen dort 
 
-- Zum Starten des Projektes wechseln Sie im Terminal (Terminal Ihres Rechners oder das Terminal in der IDE) in den Projektordner (`cd IKT-PWA-01`) und führen dort 
+    `npm install` 
 
-	`npm install` 
-
-	aus (es genügt auch `npm i`). Damit werden alle erforderlichen Abhängigkeiten installiert. Es entsteht der `node_modules`-Ordner. 
+    aus (es genügt auch `npm i`). Damit werden alle erforderlichen Abhängigkeiten installiert.
 
 - Nach erfolgreicher Installation der Abhängigkeiten, geben Sie  
 
-	`npm start` 
+    `npm start` 
 
-	ein, um Ihr Projekt auszuführen (Es wird der `http-server` mit der Option `-c-1` gestartet. Diese Option disabled Caching). Klicken Sie danach auf [localhost:8080](http://localhost:8080) oder geben Sie die URL direkt in Ihren Browser ein.
+    ein, um Ihr Projekt auszuführen. Klicken Sie danach auf [localhost:8080](http://localhost:8080) oder geben Sie die URL direkt in Ihren Browser ein.
 
-- Sollten Sie Änderungen an der IMplementierung vornehmen und diese ausprobieren wollen, müssen Sie den Server zunächst wieder stoppen:
+- Um das Backend zu starten müssen Sie aus dem Projektordner (`IKT-PWA`) in den Backend Ordner wechseln mit `cd backend` und dann mit `npm run watch` starten
 
-	`Ctrl-C`
+## Was die *Progressive Web Application - foodie* alles kann:
 
-	und geben dann erneut 
+- ein responsives Frontend 
 
-	`npm start` 
+- ein Backend welches über die MongoDB Cloud verbunden ist 
+  
+- eine Datenbank MongoDB Atlas Cluster 
 
-	ein. 
+- ist installierbar  
 
-## Anpassungen
+- ist offline nutzbar  
 
-Wir verwenden [Material Design Lite](https://getmdl.io/) für das Design unserer Anwendung. Sie können natürlich auch andere CSS-Frameworks verwenden. Sollte Ihnen die aktuelle Farbkombination aus `blue-grey` und `red` nicht zusagen, können Sie in den `index.html`-Datein (im `public`- und im `public/help`-Ordner auch eine andere Kombination auswählen (siehe
+- verwendet die IndexedDB
 
-`href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css"`
+- verwendet Hintergrundsynchronisation 
 
-Andere Farbkombinationen finden Sie [hier](https://getmdl.io/customize/#cdn-code). Es genügt auch, die entsprechenden Farben in den Dateinamen einzutragen 
+- verwendet Push-Nachrichten
 
-`material.{primary}-{accent}.min.css` 
+- verwendet die Gelocation API 
 
-(z.B. `material.indigo-pink.min.css`).
+- verwendet die Kamera
 
---
+Über den `+` Button können neue Blogeinträge verfasst werden. Hierbei kann man einen Titel festlegen, 
+einen Text und die Location, sowohl selbst eingeben als auch über Geolocation bestimmen lassen.
+Außerdem kann ein Foto gemacht werden. Die Anwendung kann installiert werden und ist auch offline verfügbar.
+Nach dem speichern des neuen Blog Eintrags erscheint unten eine Benachrichtigung welche vermittelt das 
+der Eintrag in der Datenbank angekommen ist. Als Datenbank wurde die MongoDB Atlas gewählt, dies ist eine 
+Cloud Datenbank, in einem Cluster befinden sich drei collections in denen die Daten gespeichert werden.
+Die Anwendung kann auf verschiedenen Geräten verwendet werden. 
 
-Sie können natürlich auch ein anderes Bild als das HTW-Bild einbinden. Beachten Sie dabei nur, dass wir mithilfe responsiven Verhaltens drei verschiedene Bilder davon benötigen, idealerweise mit den Pixel-Maßen `1200 x 457` (`*-lg.jpg`), `900 x 343` (`*.jpg`) und `480 x 183` (`*-sm.jpg`). Siehe dann die `public/index.html`.
-
---
-
-Binden Sie ruhig Ihr eigenes `favicon.ico` in den Projektordner ein. Erstellen können Sie sich ein solches `favicon` z.B. [hier](https://favicon.io/) oder [hier](https://www.ionos.de/tools/favicon-generator). Macht Spaß und gibt allen Ihren Webanwendungen eine persönliche Note ;-).
-
- 
