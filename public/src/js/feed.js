@@ -4,6 +4,7 @@ let closeCreatePostModalButton = document.querySelector('#close-create-post-moda
 let sharedMomentsArea = document.querySelector('#shared-moments');
 let form = document.querySelector('form');
 let titleInput = document.querySelector('#title');
+let textInput = document.querySelector('#text');
 let locationInput = document.querySelector('#location');
 let videoPlayer = document.querySelector('#player');
 let canvasElement = document.querySelector('#canvas');
@@ -12,6 +13,7 @@ let imagePicker = document.querySelector('#image-picker');
 let imagePickerArea = document.querySelector('#pick-image');
 let file = null;
 let titleValue = '';
+let textValue = '';
 let locationValue = '';
 let imageURI = '';
 let locationButton = document.querySelector('#location-btn');
@@ -165,17 +167,28 @@ function createCard(card) {
   image.src = card.image_id;
   cardTitle.style.backgroundImage = 'url('+ image.src +')';
   cardTitle.style.backgroundSize = 'cover';
+  cardTitle.style.borderRadius = '30px';
+  cardTitle.style.marginBottom = '30px';
+  cardTitle.style.marginTop = '30px';
 
   cardWrapper.appendChild(cardTitle);
-  let cardTitleTextElement = document.createElement('h2');
+
+  let cardTitleTextElement = document.createElement('div');
   cardTitleTextElement.className = 'mdl-card__title-text';
   cardTitleTextElement.textContent = card.title;
-  cardTitleTextElement.classList.add('whiteText');
-  cardTitle.appendChild(cardTitleTextElement);
-  let cardSupportingText = document.createElement('div');
+  // cardTitleTextElement.classList.add('whiteText');
+
+  cardWrapper.appendChild(cardTitleTextElement)
+
+  let cardTitleTextTextElement = document.createElement('p');
+  cardTitleTextTextElement.className = 'mdl-card__text-text';
+  cardTitleTextTextElement.textContent = card.text;
+
+
+  cardWrapper.appendChild(cardTitleTextTextElement);
+  let cardSupportingText = document.createElement('p');
   cardSupportingText.className = 'mdl-card__supporting-text';
   cardSupportingText.textContent = card.location;
-  cardSupportingText.style.textAlign = 'center';
   cardWrapper.appendChild(cardSupportingText);
   componentHandler.upgradeElement(cardWrapper);
   sharedMomentsArea.appendChild(cardWrapper);
@@ -209,6 +222,7 @@ function updateUI(data) {
 function sendDataToBackend() {
   const formData = new FormData();
   formData.append('title', titleValue);
+  formData.append('text', textValue);
   formData.append('location', locationValue);
   formData.append('file', file);
 
@@ -226,6 +240,7 @@ function sendDataToBackend() {
         console.log('data ...', data);
         const newPost = {
           title: data.title,
+          text: data.text,
           location: data.location,
           image_id: imageURI
         }
@@ -248,8 +263,10 @@ form.addEventListener('submit', event => {
   closeCreatePostModal();
 
   titleValue = titleInput.value;
+  textValue = textInput.value;
   locationValue = locationInput.value;
   console.log('titleInput', titleValue)
+  console.log('textInput', textValue)
   console.log('locationInput', locationValue)
   console.log('file', file)
 
@@ -259,6 +276,7 @@ form.addEventListener('submit', event => {
           let post = {
             id: new Date().toISOString(),
             title: titleValue,
+            text: textValue,
             location: locationValue,
             image_id: file      // file durch den Foto-Button belegt
           };
