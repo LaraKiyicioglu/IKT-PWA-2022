@@ -1,7 +1,7 @@
 {
-  "name": "IKT-PWA-01",
+  "name": "foodie-blog",
   "version": "1.0.0",
-  "description": "Grundgerüst einer PWA",
+  "description": "Food Blog",
   "main": "index.js",
   "scripts": {
     "start": "http-server -c-1"
@@ -15,7 +15,7 @@
     "htw",
     "fiw"
   ],
-  "author": "J. freiheit",
+  "author": "L. Kiyicioglu",
   "license": "ISC",
   "devDependencies": {
     "http-server": "^14.1.0"
