@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/db.js');
 
-const CACHE_VERSION = 137;
+const CACHE_VERSION = 146;
 const CURRENT_STATIC_CACHE = 'static-v'+CACHE_VERSION;
 const CURRENT_DYNAMIC_CACHE = 'dynamic-v'+CACHE_VERSION;
 const STATIC_FILES = [
@@ -17,7 +17,6 @@ const STATIC_FILES = [
     '/src/style.css',
     '/src/css/others',
     '/src/css/bootstrap',
-    '/src/images/htw.jpg',
     'https://fonts.googleapis.com/css?family=Roboto:400,700',
     'https://fonts.googleapis.com/icon?family=Material+Icons',
     'https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css'
