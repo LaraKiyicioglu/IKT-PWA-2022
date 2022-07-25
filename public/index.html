@@ -1,124 +1,422 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>IKT-PWA</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css" type="text/css">
-  <link rel="stylesheet" href="./src/css/app.css">
-  <link rel="stylesheet" href="./src/css/feed.css">
-  <link rel="manifest" href="manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="HTW-Insta">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw57x57.png" sizes="57x57">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw60x60.png" sizes="60x60">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw72x72.png" sizes="72x72">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw76x76.png" sizes="76x76">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw114x114.png" sizes="114x114">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw120x120.png" sizes="120x120">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw144x144.png" sizes="144x144">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw152x152.png" sizes="152x152">
-  <link rel="apple-touch-icon" href="./src/images/icons/ios-fiw180x180.png" sizes="180x180">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="foodie-blog">
+    <title>foodie</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="./src/css/app.css">
+    <link rel="stylesheet" href="./src/css/feed.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="./src/images/core-img/favicon.ico">
+    <link href="./src/style.css" rel="stylesheet">
+    <link href="./src/css/responsive/responsive.css" rel="stylesheet">
 </head>
-<body>
 
-<div id="app">
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <!-- Title -->
-        <span class="mdl-layout-title">IKT-PWA</span>
-        <!-- Add spacer, to align navigation to the right -->
-        <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="/">Bilder</a>
-          <a class="mdl-navigation__link" href="/help">Hilfe</a>
-          <div class="drawer-option">
-            <button class="enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent">
-              Benachrichtigungen Ein
-            </button>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <div class="mdl-layout__drawer">
-      <span class="mdl-layout-title">IKT-PWA</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="/">Bilder</a>
-        <a class="mdl-navigation__link" href="/help">Hilfe</a>
-        <div class="drawer-option">
-          <button class="enable-notifications mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent">
-            Benachrichtigungen Ein
-          </button>
-        </div>
-      </nav>
-    </div>
-    <main class="mdl-layout__content mat-typography">
-      <form>
-        <div id="create-post">
-          <video id="player" autoplay></video>
-          <canvas id="canvas" width="320px" height="240px"></canvas>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="capture-btn">Foto</button>
-          <div id="pick-image">
-            <h6>Bild auswählen</h6>
-            <input type="file" accept="image/*" id="image-picker">
-          </div>
-          <div class="input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="title">
-            <label class="mdl-textfield__label" for="title" name="title">Titel</label>
-          </div>
-          <div class="input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="manual-location">
-            <input class="mdl-textfield__input" type="text" id="location">
-            <label class="mdl-textfield__label" for="location" name="location">Ort</label>
-          </div>
-          <div class="input-section">
-            <button class="mdl-button mdl-js-button mdl-button--colored" type="button" id="location-btn">Location</button>
-            <div class="mdl-spinner mdl-js-spinner is-active" id="location-loader"></div>
-          </div>
-          <div id="map" class="map"></div>
-          <br>
-          <div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent"
-                    type="submit" id="post-btn">Speichern
-            </button>
-          </div>
-          <br>
-          <div>
-            <button class="mdl-button mdl-js-button mdl-button--fab" id="close-create-post-modal-btn" type="button">
-              <i class="material-icons">close</i>
-            </button>
-          </div>
-        </div>
-      </form>
-      <img srcset="./src/images/htw-lg.jpg 1200w,
-             ./src/images/htw.jpg 900w,
-             ./src/images/htw-sm.jpg 480w"
-           src="./src/images/htw.jpg" alt="HTW Wilhelminenhof" class="main-image">
-      <div class="page-content">
-        <h5 class="text-center mdl-color-text--primary">HTW-Insta</h5>
-        <div id="shared-moments"></div>
-      </div>
-      <div class="floating-button">
-        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
-                id="share-image-button">
-          <i class="material-icons">add</i>
-        </button>
-      </div>
-      <div id="confirmation-toast" aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
-        <div class="mdl-snackbar__text"></div>
-        <button type="button" class="mdl-snackbar__action"></button>
-      </div>
-    </main>
-  </div>
+<body>
+<div id="preloader">
+    <div class="yummy-load"></div>
 </div>
+<header class="header_area">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="logo_area text-center">
+                    <a href="index.html" class="yummy-logo">foodie</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#yummyfood-nav"
+                            aria-controls="yummyfood-nav" aria-expanded="false" aria-label="Toggle navigation"><i
+                            class="fa fa-bars" aria-hidden="true"></i> Menu
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="yummyfood-nav">
+                        <ul class="navbar-nav" id="yummy-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="single.html">Recent Post</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="gallery.html">Pictures</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#aboutme">About Me</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<form>
+  <div id="create-post">
+    <video id="player" autoplay></video>
+    <canvas id="canvas" width="320px" height="340px"></canvas>
+    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="capture-btn">Foto</button>
+    <div id="pick-image">
+      <h6>Bild auswählen</h6>
+      <input type="file" accept="image/*" id="image-picker">
+    </div>
+    <div class="input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="title">
+      <label class="mdl-textfield__label" for="title" name="title">Titel</label>
+    </div>
+    <div class="input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id="text">
+      <label class="mdl-textfield__label" for="text" name="text">Text</label>
+    </div>
+    <div class="input-section mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="manual-location">
+      <input class="mdl-textfield__input" type="text" id="location">
+      <label class="mdl-textfield__label" for="location" name="location">Ort</label>
+    </div>
+    <div class="input-section">
+      <button class="mdl-button mdl-js-button mdl-button--colored" type="button" id="location-btn">Location
+      </button>
+      <div class="mdl-spinner mdl-js-spinner is-active" id="location-loader"></div>
+    </div>
+    <div id="map" class="map"></div>
+    <br>
+    <div>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--accent"
+              type="submit" id="post-btn">Speichern
+      </button>
+    </div>
+    <br>
+    <div>
+      <button class="mdl-button mdl-js-button mdl-button--fab" id="close-create-post-modal-btn" type="button">
+        <i class="material-icons">close</i>
+      </button>
+    </div>
+  </div>
+</form>
+<section class="welcome-post-sliders owl-carousel">
+    <div class="welcome-single-slide">
+        <img src="./src/images/bg-img/slide-1.JPG" alt="">
+        <div class="project_title">
+            <a href="#">
+                <h5>French Toast, Benedict Berlin</h5>
+            </a>
+        </div>
+    </div>
+    <div class="welcome-single-slide">
+        <img src="./src/images/bg-img/slide-2.JPG" alt="">
+        <div class="project_title">
+            <a href="#">
+                <h5>Tower of Babylon, Benedict Berlin</h5>
+            </a>
+        </div>
+    </div>
+    <div class="welcome-single-slide">
+        <img src="src/images/bg-img/slide-3.JPG" alt="">
+        <div class="project_title">
+            <a href="#">
+                <h5>Lokum, Izmit</h5>
+            </a>
+        </div>
+    </div>
+    <div class="welcome-single-slide">
+        <img src="./src/images/bg-img/slide-4.JPG" alt="">
+        <div class="project_title">
+            <a href="#">
+                <h5>die größten Eiskugeln in Berlin, Viktoria Eis</h5>
+            </a>
+        </div>
+    </div>
+</section>
+<section class="blog_area section_padding_0_80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="single-post wow fadeInUp" data-wow-delay=".2s">
+                            <div class="page-content">
+                                <div id="shared-moments"></div>
+                                <a href="single.html" class="read-more">Continue Reading..</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="single-post wow fadeInUp" data-wow-delay=".4s">
+                            <div class="post-thumb">
+                                <img src="./src/images/blog-img/2.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <a href="#">
+                                    <h4 class="post-headline">Adana Grillhaus</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="single-post wow fadeInUp" data-wow-delay=".6s">
+                            <div class="post-thumb">
+                                <img src="src/images/blog-img/3.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                </div>
+                                <a href="#">
+                                    <h4 class="post-headline">Der Avocadoclub</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="single-post wow fadeInUp" data-wow-delay=".8s">
+                            <div class="post-thumb">
+                                <img src="src/images/blog-img/4.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                </div>
+                                <a href="#">
+                                    <h4 class="post-headline">Zum grillen geht man ins: Babikyu</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="single-post wow fadeInUp" data-wow-delay="1s">
+                            <div class="post-thumb">
+                                <img src="src/images/blog-img/5.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                </div>
+                                <a href="#">
+                                    <h4 class="post-headline">Ein Cruffin ist die perfekte Mischung eines Muffins und Criossants</h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="list-blog single-post d-sm-flex wow fadeInUpBig" data-wow-delay=".2s">
+                            <div class="post-thumb">
+                                <img src="./src/images/blog-img/6.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                </div>
+                                <a href="#">
+                                    <h4 class="post-headline">Sehr sommerlich und quasi eine 'limited editon': Pancakes mit Pistaziencreme und Erdbeeren</h4>
+                                </a>
+                                <p>Im Benedict gibt es quasi 24/7 frühstück, die gesamte Mentatlität dreht sich rund um den Morgen.</p>
+                                <a href="single_post.html" class="read-more">Continue Reading..</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="list-blog single-post d-sm-flex wow fadeInUpBig" data-wow-delay=".4s">
+                            <div class="post-thumb">
+                                <img src="src/images/blog-img/7.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                </div>
+                                <a href="#">
+                                    <h4 class="post-headline">Chili Reis von Sticks & Sushi, hört sich simpel an aber ist einfach super lecker</h4>
+                                </a>
+                                <p>Sticks'n'Sushi ist eine Mischung aus japanischer Tradition und nordischer Küche</p>
+                                <a href="#" class="read-more">Continue Reading..</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="list-blog single-post d-sm-flex wow fadeInUpBig" data-wow-delay=".6s">
+                            <div class="post-thumb">
+                                <img src="src/images/blog-img/8.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                </div>
+                                <a href="#">
+                                    <h4 class="post-headline">Lovebirds, sieht nach mehr aus als es ist</h4>
+                                </a>
+                                <p>Lovebirds, im Herzen Berlins, sieht besser aus als es schmeckt</p>
+                                <a href="#" class="read-more">Continue Reading..</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="list-blog single-post d-sm-flex wow fadeInUpBig" data-wow-delay=".8s">
+                            <div class="post-thumb">
+                                <img src="src/images/blog-img/9.JPG" alt="">
+                            </div>
+                            <div class="post-content">
+                                <div class="post-meta d-flex">
+                                </div>
+                                <a href="#">
+                                    <h4 class="post-headline">Mido ist vielfältig und das Preis Leistungsverhältnis ist super</h4>
+                                </a>
+                                <p>Bei Mido gibt es Sushi, Suppen, Curry und vieles mehr...</p>
+                                <a href="#" class="read-more">Continue Reading..</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                <div class="blog-sidebar mt-5 mt-lg-0">
+                    <div class="single-widget-area about-me-widget text-center">
+                        <div class="widget-title">
+                            <h6 id="aboutme">About Me</h6>
+                        </div>
+                        <div class="about-me-widget-thumb">
+                            <img src="./src/images/about-img/1.jpg" alt="">
+                        </div>
+                        <h4 class="font-shadow-into-light">Lara-Sumru</h4>
+                        <p>
+                            In Berlin versammeln sich viele verschiedene Küchen aus aller Welt.
+                            Mit diesem Blog möchte ich meine persönlichen Erfahrungen teilen und Menschen inspirieren mal etwas neues zu probieren.
+                        </p>
+                    </div>
+                    <div class="single-widget-area subscribe_widget text-center">
+                        <div class="widget-title">
+                            <h6>Subscribe &amp; Follow</h6>
+                        </div>
+                        <div class="subscribe-link">
+                            <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQFo90HGh4N60wAAAYIrb12Y3wEPS0h0h6jvAAV0oR9JDWvTeQyCelfZi7auOpHpTpCLHd4qmKKSVMNVvAT2yrKiro6uDa_gshiRb3Zd5_W90yI7OKBIIUhJEi2exKyV0-1AloM=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Flara-sumru-kiyicioglu-0766251b8"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="instargram_area owl-carousel section_padding_100_0 clearfix" id="portfolio">
+    <div class="instagram_gallery_item">
+        <img src="./src/images/instagram-img/1.JPG" alt="">
+        <div class="hover_overlay">
+            <div class="yummy-table">
+                <div class="yummy-table-cell">
+                    <div class="follow-me text-center">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="instagram_gallery_item">
+        <img src="./src/images/instagram-img/3.JPG" alt="">
+        <div class="hover_overlay">
+            <div class="yummy-table">
+                <div class="yummy-table-cell">
+                    <div class="follow-me text-center">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="instagram_gallery_item">
+        <img src="./src/images/instagram-img/4.JPG" alt="">
+        <div class="hover_overlay">
+            <div class="yummy-table">
+                <div class="yummy-table-cell">
+                    <div class="follow-me text-center">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="instagram_gallery_item">
+        <img src="./src/images/instagram-img/5.JPG" alt="">
+        <div class="hover_overlay">
+            <div class="yummy-table">
+                <div class="yummy-table-cell">
+                    <div class="follow-me text-center">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="instagram_gallery_item">
+        <img src="./src/images/instagram-img/6.JPG" alt="">
+        <div class="hover_overlay">
+            <div class="yummy-table">
+                <div class="yummy-table-cell">
+                    <div class="follow-me text-center">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="instagram_gallery_item">
+        <img src="./src/images/instagram-img/1.JPG" alt="">
+        <div class="hover_overlay">
+            <div class="yummy-table">
+                <div class="yummy-table-cell">
+                    <div class="follow-me text-center">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="instagram_gallery_item">
+        <img src="./src/images/instagram-img/4.JPG" alt="">
+        <div class="hover_overlay">
+            <div class="yummy-table">
+                <div class="yummy-table-cell">
+                    <div class="follow-me text-center">
+                        <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Follow me</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="social_icon_area clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="footer-social-area d-flex">
+                    <div class="single-icon">
+                        <a href="https://www.linkedin.com/authwall?trk=bf&trkInfo=AQFo90HGh4N60wAAAYIrb12Y3wEPS0h0h6jvAAV0oR9JDWvTeQyCelfZi7auOpHpTpCLHd4qmKKSVMNVvAT2yrKiro6uDa_gshiRb3Zd5_W90yI7OKBIIUhJEi2exKyV0-1AloM=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Flara-sumru-kiyicioglu-0766251b8"><i class="fa fa-linkedin-square" aria-hidden="true"></i><span>linkedin</span></a>
+                    </div>
+                    <div class="single-icon">
+                        <a href="https://www.instagram.com/"><i class="fa fa-instagram" aria-hidden="true"></i><span>Instagram</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="floating-button">
+    <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored"
+            id="share-image-button">
+        <i class="material-icons">add</i>
+    </button>
+</div>
+<div id="confirmation-toast" aria-live="assertive" aria-atomic="true" aria-relevant="text"
+     class="mdl-snackbar mdl-js-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button type="button" class="mdl-snackbar__action"></button>
+</div>
+<script src="./src/js/jquery/jquery-2.2.4.min.js"></script>
+<script src="./src/js/bootstrap/popper.min.js"></script>
+<script src="./src/js/bootstrap/bootstrap.min.js"></script>
+<script src="./src/js/others/plugins.js"></script>
+<script src="./src/js/active.js"></script>
 <script defer src="./src/js/material.min.js"></script>
 <script src="./src/js/idb.js"></script>
 <script src="./src/js/db.js"></script>
@@ -126,5 +424,11 @@
 <script src="./src/js/feed.js" type="module"></script>
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js');
+        });
+    }
+</script>
 </body>
-</html>

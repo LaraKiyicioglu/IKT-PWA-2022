@@ -1,7 +1,7 @@
 importScripts('/src/js/idb.js');
 importScripts('/src/js/db.js');
 
-const CACHE_VERSION = 41;
+const CACHE_VERSION = 137;
 const CURRENT_STATIC_CACHE = 'static-v'+CACHE_VERSION;
 const CURRENT_DYNAMIC_CACHE = 'dynamic-v'+CACHE_VERSION;
 const STATIC_FILES = [
@@ -13,6 +13,10 @@ const STATIC_FILES = [
     '/src/js/idb.js',
     '/src/css/app.css',
     '/src/css/feed.css',
+    '/src/css/responsive',
+    '/src/style.css',
+    '/src/css/others',
+    '/src/css/bootstrap',
     '/src/images/htw.jpg',
     'https://fonts.googleapis.com/css?family=Roboto:400,700',
     'https://fonts.googleapis.com/icon?family=Material+Icons',
@@ -105,6 +109,7 @@ self.addEventListener('sync', event => {
                         console.log('data from IndexedDB', data);
                         const formData = new FormData();
                         formData.append('title', data.title);
+                        formData.append('text', data.text);
                         formData.append('location', data.location);
                         formData.append('file', data.image_id);
 
@@ -184,4 +189,12 @@ self.addEventListener('notificationclose', event => {
     console.log('notification was closed', event);
 });
 
+importScripts(
+    'https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js'
+);
+
+workbox.routing.registerRoute(
+    ({request}) => request.destination === 'image',
+    new workbox.strategies.NetworkFirst()     // NetworkFirst() vs CacheFirst()
+)
 
